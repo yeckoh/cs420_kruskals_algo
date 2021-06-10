@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="main">
+	<property name="source.folder" value="../src/" />
+	<property name="class.folder" value="../bin/" />
+	<property name="jar.folder" value="../bin/" />
+	<property name="jar.name" value="../bin/cs420_kruskal.jar" />
+	<property name="class.with.main" value="mainFrame" />
+	<target name="main" depends="clean, build, pack">
+		<echo>DONE!</echo>
+	</target>
+	<target name="clean">
+		<echo>delete bin if there is one</echo>
+		<delete dir="bin" failonerror="false" />
+	</target>
+	<target name="build">
+		<echo>my java files are in ${source.folder}</echo>
+		<echo>my class files are in ${class.folder}</echo>
+		<mkdir dir="${jar.folder}" />
+		<javac srcdir="${source.folder}" destdir="${class.folder}" />
+	</target>
+	<target name="pack">
+		<echo>pack resource and class files</echo>
+		<jar destfile="${jar.name}">
+			<fileset dir="${class.folder}">
+				<include name="**/*.class" />
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="${class.with.main}" />
+				<section name="Information">
+					<attribute name="Auth" value="wesley chang" />
+					<attribute name="Id" value="00960978" />
+					<attribute name="Date" value="1 Apr 2k19" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+</project>
